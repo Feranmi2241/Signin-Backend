@@ -101,6 +101,12 @@ const postSignin= async (req, res) => {
             return res.status(400).send('Invalid email or password');
         }
 
+    const token = jwt.sign({userId: user._id }, process.env.Jwt_Secret, {
+        expiresIn: '1h' 
+
+    })
+    console.log(token);
+    
         res.status(201).json('successful')
     } catch (err) {
         console.error('Login error:', err);
